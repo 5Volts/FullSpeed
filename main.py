@@ -26,7 +26,6 @@ if screen[100][5][0] < 250:
 while(1):
 	old = screen[rightcorner[1]:leftcorner[1]]
 	print("Waiting for ISBN...")
-	# Keep taking screenshot until RedText is seen
 	while True:
 		screen = np.array(pyautogui.screenshot())
 		new = screen[rightcorner[1]:leftcorner[1]]
@@ -39,7 +38,6 @@ while(1):
 		time.sleep(loopdelay)
 
 	print("Selecting the book on table...")
-	# Go down the screen to look for highlighted book
 	for i in range(404,627,2):
 		if(screen[i][119][0] < 160):
 			print(screen[i][119])
@@ -47,20 +45,15 @@ while(1):
 			break
 
 	print("Clicking on the book...")
-	# Click on highlighted book
 	pyautogui.moveTo(highlighted[0],highlighted[1],duration=mousespeed)
 	pyautogui.click()
 
 	print("Clicking on Book/Course Info...")
-	# Click on Book/Course Info
 	pyautogui.moveTo(746,505,duration=mousespeed)
-	
 	pyautogui.click()
 
 	print("Waiting for screen to change...")
-	# Wait for screen change
-	# print(screen[redtext_coor[0]][redtext_coor[1]][0])
-	# pyautogui.moveTo(redtext_coor[0],redtext_coor[1],duration=0.3)
+
 	while True:
 		screen = np.array(pyautogui.screenshot())
 		if screen[redtext_coor[1]][redtext_coor[0]][0] > 200:
@@ -68,11 +61,10 @@ while(1):
 		time.sleep(loopdelay)
 
 	print(f"Showing course info for {showcourse_time} seconds")
-	# Show Book Course Info for 4 seconds
+
 	time.sleep(showcourse_time)
 
 	print("Clicking on Back Button...")
-	# Go to back button
 	pyautogui.moveTo(683,713,duration=mousespeed)
 	pyautogui.click()
 
