@@ -1,6 +1,6 @@
 import json
 
-print("Crazy Fast ISBN Look up. Made by Tan Run En (Eric).")
+print("Crazy Fast ISBN Look Up program. For Spring 2019 only. Made by Tan Run En (Eric).")
 data = open("DA_ISBN_TO_CLASS.json",'rb')
 corpus = json.load(data)
 
