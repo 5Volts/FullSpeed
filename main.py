@@ -1,7 +1,7 @@
 import json
 
 print("Crazy Fast ISBN Look Up program. For Spring 2019 only. Made by Tan Run En (Eric).")
-data = open("DA_ISBN_TO_CLASS.json",'rb')
+data = open("DA_ISBN2CLASS.json",'rb')
 corpus = json.load(data)
 
 while True:
