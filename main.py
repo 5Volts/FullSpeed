@@ -7,11 +7,14 @@ corpus = json.load(data)
 while True:
 	isbn = int(input("Enter ISBN or scan it:"))
 	try:
-		try:
+		if str(isbn) in corpus:
 			for classes in corpus[str(isbn)]:
 				print(classes)
-		except:
-			for classes in corpus[str(isbn+1)]
+		elif str(isbn-1) in corpus:
+			for classes in corpus[str(isbn-1)]:
+				print(classes)
+		elif str(isbn+1) in corpus:
+			for classes in corpus[str(isbn-1)]:
 				print(classes)
 	except:
 		print("Book not found. Try using mbsbooks.")
