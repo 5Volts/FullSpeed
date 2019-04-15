@@ -4,19 +4,22 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.options import Options
 import json
 
 def wait_for_element(browser, element, by_what):
     return WebDriverWait(browser, 10).until(expected_conditions.presence_of_element_located((by_what, element)))
 
 corpus = {}
+options = Options()
+options.headless = True
 
 if __name__ == '__main__':
     start = 1
-    depa = 38
-    aggr = 143
+    depa = 52
+    aggr = 199 
     while(1):
-        browser = webdriver.Chrome(executable_path="C:\Program Files (x86)\chromedriver.exe")
+        browser = webdriver.Chrome(executable_path="C:\Program Files (x86)\chromedriver.exe", chrome_options=options)
         while(1):
             try:
                 browser.get('http://books.deanza.edu/SelectTermDept.aspx')
@@ -66,7 +69,10 @@ if __name__ == '__main__':
 
         for k in range(no_of_act_book):
             cs1 = wait_for_element(browser,f'//*[@id="ctl00_ctl00_Content_Content_rptCourses_ctrl{k}_lblCourseInfo"]',By.XPATH)
-            crs = cs1.text[22:31]+cs1.text[40:43]
+            # print(cs1.text)
+            crs = cs1.text[22:44]
+            if crs[-1] == 'I':
+                crs = crs[:-1]
             corpus[crs] = []
             print(crs)
             i = 0
@@ -88,5 +94,3 @@ if __name__ == '__main__':
         a.close()
         aggr += 1
         browser.close()
-
-
