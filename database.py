@@ -10,16 +10,16 @@ for i in range(1,257):
     dip = json.load(a)
     for classe,booksandtitle in dip.items():
         for books in booksandtitle:
-            book = books[0][3:-1]
+            isbn = books[0][3:-1]
             title = books[1]
 
-            isbn_and_title = book+ " " + title
             # print(isbn_and_title)
-            if isbn_and_title not in corpus:
-                corpus[isbn_and_title] = []
+            if isbn not in corpus:
+                corpus[isbn] = []
             if classe[-1] == 'n':
             	classe = classe[:-2]
-            corpus[isbn_and_title].append(classe)
+            corpus[isbn].append(title)
+            corpus[isbn].append(classe)
 
 for booktitle, classes in corpus.items():
     corpus[booktitle] =list(dict.fromkeys(corpus[booktitle]))
