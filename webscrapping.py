@@ -16,8 +16,8 @@ options.headless = True
 
 if __name__ == '__main__':
     start = 1
-    depa = 52
-    aggr = 199 
+    depa = 23
+    aggr = 92
     while(1):
         browser = webdriver.Chrome(executable_path="C:\Program Files (x86)\chromedriver.exe", chrome_options=options)
         while(1):
@@ -79,15 +79,20 @@ if __name__ == '__main__':
             while(1):
                 try:
                     if i >= 10:
+                        title = browser.find_element_by_xpath(f'//*[@id="ctl00_ctl00_Content_Content_rptCourses_ctrl{k}_rptItems_ctl{i}_lblItemTxtTitle"]')
                         csisbn = browser.find_element_by_xpath(f'//*[@id="ctl00_ctl00_Content_Content_rptCourses_ctrl{k}_rptItems_ctl{i}_lblItemTxtISBN"]')
                     else:
+                        title = browser.find_element_by_xpath(f'//*[@id="ctl00_ctl00_Content_Content_rptCourses_ctrl{k}_rptItems_ctl0{i}_lblItemTxtTitle"]')
                         csisbn = browser.find_element_by_xpath(f'//*[@id="ctl00_ctl00_Content_Content_rptCourses_ctrl{k}_rptItems_ctl0{i}_lblItemTxtISBN"]')
                     i += 1
                     isbn = csisbn.text
-                    corpus[crs].append(isbn)
+                    title_of_book = title.text
+                    print(title.text)
                     print(isbn)
+                    corpus[crs].append([isbn,title_of_book])
                 except:
                     break
+
         print("Dumping data")
         a = open(f"DA_Bookstore_Corpus{aggr}.json", 'w')
         json.dump(corpus, a)
